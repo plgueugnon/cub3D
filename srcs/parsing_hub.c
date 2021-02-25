@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:34:53 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/25 13:08:29 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/02/26 00:20:32 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void	ft_end_file_read(t_data *data, int fd)
 	{
 		ft_free_line_before_next(data);
 		close (fd);
-		ft_parsing_error("OK", data, fd);// A retirer
 	}
 	else
 		ft_parsing_error("Error\nHey the map is missing!", data, fd);
@@ -124,14 +123,24 @@ void	ft_parse_cub_file(t_data *data, int fd)
 		ft_free_line_before_next(data);
 	}
 	ft_end_file_read(data, fd);
+	ft_transform_to_tab(list, data); // 1 fuite ici sur derniere ligne
+	ft_floodfill(data, 48, 55); // 2e fuite ici
 
 	// DEBUG
-	printf("map.h verif: %d\n", data->p.maph);
+//	printf("map.h verif: %d\n", data->p.maph);
 //	printf("%s\n", line);
 	printf("mapw%d\n", data->p.mapw);
 	printf("maph%d\n", data->p.maph);
 	printf("mapx%d\n", data->mapx);
 	printf("mapy%d\n", data->mapy);
-	printf("%p\n", list);
+//	printf("%p\n", list);
 	ft_print_list(list);
+//	ft_parsing_error("OK", data, fd);
+	int z = 0;
+	while (data->map[z])
+	{
+		printf("%s\n", data->map[z]);
+		z++;
+	}
+	ft_map_error("OK", data);
 }

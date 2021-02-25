@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 16:55:47 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/25 13:10:00 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/02/25 23:44:15 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_parse {
 	int maph;
 	t_list **lstptr;
 	char **lptr;
+	int	iszero[2];
 }			t_parse;
 
 typedef struct s_img {
@@ -157,6 +158,9 @@ typedef struct	s_data {
 
 // ERROR
 void	ft_parsing_error(char *err, t_data *data, int fd);
+void	ft_map_error(char *err, t_data *data);
+void	ft_del(void *content);
+void	ft_free_map(t_data *data);
 
 // INIT
 void	ft_init_parsing_values(t_data *data);
@@ -188,6 +192,17 @@ void	ft_parse_map(t_data *data, char *line, int fd);
 void	ft_free_line_before_next(t_data *data);
 void	ft_link_line(t_list **list, void *content, t_data *data, int fd);
 
+// QUEUE MANAGEMENT
+void	ft_initialise_queue(t_queue *q);
+int		ft_queue_is_empty(t_queue *q);
+void	ft_add_to_queue(t_queue *q, int y, int x, t_data *data);
+void	ft_remove_from_queue(t_queue *q);
+
+//FLOODFILL
+void	ft_floodfill(t_data *data, int oval, int rval);
+
+// CREATE MAP
+void	ft_transform_to_tab(t_list *list, t_data *data);
 
 // A VOIR APRES PARSING
 int	ft_key_press(int key, t_data *data);
