@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:34:53 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/26 00:20:32 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/02/26 15:47:24 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	ft_parse_cub_file(t_data *data, int fd)
 	
 	list = NULL;
 	data->p.lstptr = &list;
-	while (get_next_line(fd, &line) > 0)
+	while (ft_gnl(fd, &line, data) > 0)
 	{
 		data->p.lptr = &line;
 		if (data->p.step < 8)

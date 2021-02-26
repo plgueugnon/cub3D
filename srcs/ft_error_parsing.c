@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 20:13:40 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/25 23:23:07 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/02/26 15:53:39 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ void	ft_parsing_error(char *err, t_data *data, int fd)
 		ft_lstclear(data->p.lstptr, &ft_del);
 	*data->p.lstptr = NULL;
 	data->p.lstptr = NULL;
+	if (data->p.gnlptr)
+	{
+		free(*data->p.gnlptr);
+		*data->p.gnlptr = NULL;
+		data->p.gnlptr = NULL;
+	}
 	ft_free_line_before_next(data);
 	ft_init_parsing_values(data);
 	close(fd);
@@ -68,9 +74,17 @@ void	ft_map_error(char *err, t_data *data)
 	if (data->p.sp_tex_path)
 		free(data->p.sp_tex_path);
 	if (data->p.lstptr)
+	{
 		ft_lstclear(data->p.lstptr, &ft_del);
-//	*data->p.lstptr = NULL;
-	data->p.lstptr = NULL;
+		*data->p.lstptr = NULL;
+		data->p.lstptr = NULL;
+	}
+	if (data->p.gnlptr)
+	{
+		free(*data->p.gnlptr);
+		*data->p.gnlptr = NULL;
+		data->p.gnlptr = NULL;
+	}
 	if (data->map)
 		ft_free_map(data);
 	printf("%s\n", err);

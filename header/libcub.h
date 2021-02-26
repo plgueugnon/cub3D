@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 16:55:47 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/25 23:44:15 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/02/26 15:59:26 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_parse {
 	t_list **lstptr;
 	char **lptr;
 	int	iszero[2];
+	char **gnlptr;
 }			t_parse;
 
 typedef struct s_img {
@@ -161,6 +162,7 @@ void	ft_parsing_error(char *err, t_data *data, int fd);
 void	ft_map_error(char *err, t_data *data);
 void	ft_del(void *content);
 void	ft_free_map(t_data *data);
+int		ft_gnl(int fd, char **line, t_data *data);
 
 // INIT
 void	ft_init_parsing_values(t_data *data);

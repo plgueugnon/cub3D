@@ -6,7 +6,7 @@
 #    By: pgueugno <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 14:58:12 by pgueugno          #+#    #+#              #
-#    Updated: 2021/02/26 00:11:48 by pgueugno         ###   ########.fr        #
+#    Updated: 2021/02/26 15:58:10 by pgueugno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,12 +42,13 @@ SRCS		=	$(notdir $(shell find $(SRCS_DIR) -type f -name *.c))
 ###############################################################################
 
 CC			=	@gcc
-CFLAGS		=	-Wall -Wextra -Werror -I$(HEADERS_DIR) -g3 
-#CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address -I$(HEADERS_DIR) 
-LDFLAGS		=	-L. $(LIB_LIBFT_DIR) -Lmlx -lmlx 
-#LDFLAGS		=	-L. $(LIB_LIBFT_DIR) -Lmlx -lmlx -fsanitize=address 
+#CFLAGS		=	-Wall -Wextra -Werror -I$(HEADERS_DIR) -g3 
+CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address -I$(HEADERS_DIR) 
+#LDFLAGS		=	-L. $(LIB_LIBFT_DIR) -Lmlx -lmlx 
+LDFLAGS		=	-L. $(LIB_LIBFT_DIR) -Lmlx -lmlx -fsanitize=address 
 FRAMEWORKS	=	-framework OpenGL -framework Appkit
 RM			=	@rm -f
+BUFSIZE		= -D BUFFER_SIZE=32
 
 ###############################################################################
 #									Defining colors						      #
@@ -85,7 +86,7 @@ init_libft:
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 				@ echo "\t$(_YELLOW) compiling... $*.c"
-				$(CC) $(CFLAGS) -c $< -o $@
+				$(CC) $(CFLAGS) $(BUFSIZE) -c $< -o $@
 
 $(NAME):	$(OBJS)
 			@ echo "\t$(_YELLOW)[Creating cub3D.out file]"
@@ -107,5 +108,3 @@ fclean: clean
 re:	fclean all
 
 .PHONY: all clean fclean re bonus
-
-#gcc -Wall -Wextra -Werror -I ./mlx -Lmlx -lmlx -framework OpenGL -framework Appkit main.c
