@@ -12,10 +12,12 @@
 
 #include "libcub.h"
 
-static void	ft_cleanup_queue(t_queue *q)
+void	ft_cleanup_queue(t_queue *q)
 {
 	while (!ft_queue_is_empty(q))
 		ft_remove_from_queue(q);
+	if (q)
+		free(q);
 	q = NULL;
 }
 
@@ -90,4 +92,5 @@ void	ft_floodfill(t_data *data, int oval, int rval)
 		ft_check_next_case(data, q, y, x);
 		ft_remove_from_queue(q);
 	}
+	ft_cleanup_queue(q);
 }

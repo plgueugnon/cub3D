@@ -12,17 +12,22 @@
 
 #include "libcub.h"
 
-static int	ft_tabstrcpy(char *map, char *content)
+static void	ft_tabstrcpy(t_data *data, int i, char *content)
 {
-	int i;
+	int j;
 
-	i = 0;
-	while (content[i])
+	j = 0;
+	while (content[j])
 	{
-		map[i + 1] = content[i];
-		i++;
+		data->map[i][j + 1] = content[j];
+		j++;
 	}
-	return (i);
+//	while (content[i])
+//	{
+//		*map[i + 1] = content[i];
+//		i++;
+//	}
+//	return (j);
 }
 
 static void	ft_add_border_to_map(t_list *ptr, int j, int i, t_data *data)
@@ -36,19 +41,21 @@ static void	ft_add_border_to_map(t_list *ptr, int j, int i, t_data *data)
 	else if (j > r)
 		data->map[i][j] = '#';
 	else if (i >= 1 && i <= data->p.maph && j >= 1 && j <= r)
-		j = ft_tabstrcpy(data->map[i], ptr->content);
+		ft_tabstrcpy(data, i, ptr->content);
 }
 
 static void	ft_malloc_rows(t_data *data)
 {
-	data->map = malloc(sizeof(char *) * (data->p.maph + 3));
+//	printf("h=%d\n", data->p.maph + 2);
+	data->map = malloc(sizeof(char *) * (data->p.maph + 2));
 	if (data->map == NULL)
 		ft_map_error("Error\nMalloc of **map failed", data);
 }
 
 static void ft_malloc_col(t_data *data, int i)
 {
-	data->map[i] = malloc(sizeof(char *) * (data->p.mapw + 2));
+//	printf("w=%d\n", data->p.mapw + 2);
+	data->map[i] = malloc(sizeof(char) * (data->p.mapw + 2));
 	if (data->map[i] == NULL)
 			ft_map_error("Error\nMalloc of *map failed", data);
 }
@@ -63,7 +70,7 @@ void	ft_transform_to_tab(t_list *list, t_data *data)
 	j = 0;
 	ptr = list;
 	ft_malloc_rows(data);
-	while (i < (data->p.maph + 3))
+	while (i < (data->p.maph + 2))
 	{
 		ft_malloc_col(data, i);
 		j = 0;
@@ -72,12 +79,14 @@ void	ft_transform_to_tab(t_list *list, t_data *data)
 			ft_add_border_to_map(ptr, j, i, data);
 			j++;
 		}
-		data->map[i][j] = 0;
+//		data->map[i][j] = 0;
 		if (ptr->next != NULL && i > 0)
 			ptr = ptr->next;
 		i++;
 	}
-	data->map[i - 1] = 0;
+	free(data->map[i]); // WTF?
+	data->map[i] = NULL;
+//	data->map[i - 1] = 0;
 	ft_lstclear(data->p.lstptr, &ft_del);
 	data->p.lstptr = NULL;
 }

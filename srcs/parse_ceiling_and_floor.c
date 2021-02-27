@@ -50,16 +50,24 @@ static void	ft_basic_color_validity_check(char *line, t_data *data, int fd)
 		}
 		j++;
 	}
-	if (n != 2)
+	if (n != 2 || r != 3)
 		ft_parsing_error("Error\nInvalid comma(s) or missing values", data, fd);
 }
 
-static void	ft_create_color(t_data *data, int *tab, int flag)
+static void	ft_create_color(t_data *data, int *tab, int flag, int fd)
 {
 	if (flag == 'F')
+	{
+		if ((signed)data->p.floor != -1)
+			ft_parsing_error("Error\nF keycode already treated", data, fd);
 		data->p.floor = (255 << 24 | tab[0] << 16 | tab[1] << 8 | tab[2]);
+	}
 	else
+	{
+		if ((signed)data->p.ceiling != -1)
+			ft_parsing_error("Error\nC keycode already treated", data, fd);
 		data->p.ceiling = (255 << 24 | tab[0] << 16 | tab[1] << 8 | tab[2]);
+	}
 	data->p.step++;
 }
 
@@ -89,5 +97,5 @@ void	ft_parse_floor_and_ceiling(t_data *data, char *line, int fd, int flag)
 		if ((unsigned long)i < ft_strlen(line))
 			i++;
 	}
-	ft_create_color(data, (&tab)[3], flag);
+	ft_create_color(data, (&tab)[3], flag, fd);
 }

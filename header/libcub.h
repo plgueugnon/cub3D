@@ -162,7 +162,10 @@ void	ft_parsing_error(char *err, t_data *data, int fd);
 void	ft_map_error(char *err, t_data *data);
 void	ft_del(void *content);
 void	ft_free_map(t_data *data);
+
+//STILL REACHABLE DEL
 int		ft_gnl(int fd, char **line, t_data *data);
+void	ft_clear_still_reachable(t_data *data);
 
 // INIT
 void	ft_init_parsing_values(t_data *data);
@@ -202,6 +205,7 @@ void	ft_remove_from_queue(t_queue *q);
 
 //FLOODFILL
 void	ft_floodfill(t_data *data, int oval, int rval);
+void	ft_cleanup_queue(t_queue *q);
 
 // CREATE MAP
 void	ft_transform_to_tab(t_list *list, t_data *data);

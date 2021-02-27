@@ -42,11 +42,11 @@ SRCS		=	$(notdir $(shell find $(SRCS_DIR) -type f -name *.c))
 ###############################################################################
 
 CC			=	@gcc
-#CFLAGS		=	-Wall -Wextra -Werror -I$(HEADERS_DIR) -g3 
-CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address -I$(HEADERS_DIR) 
-#LDFLAGS		=	-L. $(LIB_LIBFT_DIR) -Lmlx -lmlx 
-LDFLAGS		=	-L. $(LIB_LIBFT_DIR) -Lmlx -lmlx -fsanitize=address 
-FRAMEWORKS	=	-framework OpenGL -framework Appkit
+ CFLAGS		=	-Wall -Wextra -Werror -I$(HEADERS_DIR) -g3 
+ #CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address -I$(HEADERS_DIR) 
+ LDFLAGS		=	-L. $(LIB_LIBFT_DIR) 
+ #LDFLAGS		=	-L. $(LIB_LIBFT_DIR) -Lmlx -lmlx -fsanitize=address 
+ #FRAMEWORKS	=	-framework OpenGL -framework Appkit
 RM			=	@rm -f
 BUFSIZE		= -D BUFFER_SIZE=32
 
@@ -87,10 +87,12 @@ init_libft:
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 				@ echo "\t$(_YELLOW) compiling... $*.c"
 				$(CC) $(CFLAGS) $(BUFSIZE) -c $< -o $@
+	#			$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME):	$(OBJS)
 			@ echo "\t$(_YELLOW)[Creating cub3D.out file]"
-			$(CC) $(OBJS) -o $@ $(LDFLAGS) $(FRAMEWORKS) 
+	#		$(CC) $(OBJS) -o $@ $(LDFLAGS) $(FRAMEWORKS) 
+			$(CC) $(OBJS) -o $@ $(LDFLAGS) 
 			@ echo "$(_GREEN)[Cub3D program created & ready to play]"
 
 clean:

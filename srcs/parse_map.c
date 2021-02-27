@@ -63,9 +63,7 @@ void	ft_parse_map(t_data *data, char *line, int fd)
 
 void	ft_free_line_before_next(t_data *data)
 {
-	if (!data->p.lptr)
-		return ;
-	else
+	if (data->p.lptr)
 	{
 		free(*data->p.lptr);
 		*data->p.lptr = NULL;

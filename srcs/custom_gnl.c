@@ -12,46 +12,17 @@
 
 #include "libcub.h"
 
-char	*ft_read_it(char **tmp, int fd)
+void	ft_clear_still_reachable(t_data *data)
 {
-	int		r;
-	char	*buf;
-	char	*p;
-
-	r = 1;
-	if (!(buf = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
-		return (NULL);
-	while (!(ft_strchr(*tmp, '\n')) && r > 0)
+	if (data->p.gnlptr)
 	{
-		(r = read(fd, buf, BUFFER_SIZE));
-		if (r)
-		{
-			buf[r] = '\0';
-			p = *tmp;
-			*tmp = ft_strjoin(*tmp, (char *)buf);
-			free(p);
-		}
+		free(*data->p.gnlptr);
+		*data->p.gnlptr = NULL;
+		data->p.gnlptr = NULL;
 	}
-	free(buf);
-	buf = NULL;
-	return (*tmp);
 }
 
-char	*ft_strncpy(char *dst, char *src, int n)
-{
-	int i;
-
-	i = 0;
-	while (src[i] && i < n)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
-}
-
-int		ft_what_is_read(char **tmp, char **line)
+static int		ft_n_char_read(char **tmp, char **line, t_data *data)
 {
 	char	*p;
 	char	*mem;
@@ -62,6 +33,7 @@ int		ft_what_is_read(char **tmp, char **line)
 		*line = ft_strdup(*tmp);
 		free(*tmp);
 		*tmp = NULL;
+		data->p.gnlptr = &(*line);
 		return (0);
 	}
 	else if (ft_strchr(*tmp, '\n') != 0)
@@ -72,6 +44,7 @@ int		ft_what_is_read(char **tmp, char **line)
 		*line = ft_strncpy(*line, *tmp, (mem - *tmp));
 		p = *tmp;
 		*tmp = ft_strdup(mem + 1);
+		data->p.gnlptr = &(*tmp);
 		free(p);
 		return (1);
 	}
@@ -82,7 +55,6 @@ int		ft_gnl(int fd, char **line, t_data *data)
 {
 	static char *tmp = NULL;
 
-	data->p.gnlptr = &tmp;
 	if (line == NULL || fd < 0 || read(fd, tmp, 0) < 0 ||
 		BUFFER_SIZE < 0)
 		return (-1);
@@ -95,5 +67,5 @@ int		ft_gnl(int fd, char **line, t_data *data)
 		return (0);
 	}
 	tmp = ft_read_it(&tmp, fd);
-	return (ft_what_is_read(&tmp, line));
+	return (ft_n_char_read(&tmp, line, data));
 }

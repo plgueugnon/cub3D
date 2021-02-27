@@ -55,9 +55,6 @@ void	ft_parse_values_before_map(t_data *data, char *line, int fd)
 
 void	ft_check_empty_lines_before_map(t_data *data, char *line, int fd)
 {
-	int i;
-
-	i = 0;
 	if (*line == '\0')
 		return ;
 	else if (data->p.step == 8 && (ft_strstr(line, "NO") ||
@@ -77,7 +74,7 @@ void	ft_check_empty_lines_before_map(t_data *data, char *line, int fd)
 		!ft_strstr(line, " "))
 		ft_parsing_error("Error\nLines before map are not empty", data, fd);
 }
-
+/*
 // A retirer
 void	ft_print_list(t_list *list)
 {
@@ -86,9 +83,9 @@ void	ft_print_list(t_list *list)
 		printf("%s\n", list->content);
 		list = list->next;
 	}
-}
+}*/
 
-void	ft_end_file_read(t_data *data, int fd)
+void	ft_end_file_r(t_data *data, int fd)
 {
 	if (data->p.step == 10)
 	{
@@ -122,10 +119,11 @@ void	ft_parse_cub_file(t_data *data, int fd)
 		}
 		ft_free_line_before_next(data);
 	}
-	ft_end_file_read(data, fd);
+	ft_end_file_r(data, fd);
 	ft_transform_to_tab(list, data); // 1 fuite ici sur derniere ligne
-	ft_floodfill(data, 48, 55); // 2e fuite ici
+	ft_floodfill(data, 48, 55);
 
+//	printf("%s\n", *data->p.gnlptr);
 	// DEBUG
 //	printf("map.h verif: %d\n", data->p.maph);
 //	printf("%s\n", line);
@@ -134,10 +132,13 @@ void	ft_parse_cub_file(t_data *data, int fd)
 	printf("mapx%d\n", data->mapx);
 	printf("mapy%d\n", data->mapy);
 //	printf("%p\n", list);
-	ft_print_list(list);
+//	ft_print_list(list);
 //	ft_parsing_error("OK", data, fd);
 	int z = 0;
-	while (data->map[z])
+	printf("ligne 0?%s\n", *data->map);
+	printf("ligne 0?%s\n", data->map[0]);
+	printf("ligne 0?%d\n", data->map[0][0]);
+	while (data->map[z] && z < data->p.maph + 2)
 	{
 		printf("%s\n", data->map[z]);
 		z++;
