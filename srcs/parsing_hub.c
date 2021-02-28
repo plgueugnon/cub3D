@@ -87,6 +87,8 @@ void	ft_print_list(t_list *list)
 
 void	ft_end_file_r(t_data *data, int fd)
 {
+	if (data->mapx == -1 || data->mapy == -1)
+		ft_parsing_error("Error\nPlayer position is missing", data, fd);
 	if (data->p.step == 10)
 	{
 		ft_free_line_before_next(data);
@@ -120,24 +122,16 @@ void	ft_parse_cub_file(t_data *data, int fd)
 		ft_free_line_before_next(data);
 	}
 	ft_end_file_r(data, fd);
-	ft_transform_to_tab(list, data); // 1 fuite ici sur derniere ligne
+	ft_transform_to_tab(list, data);
 	ft_floodfill(data, 48, 55);
 
-//	printf("%s\n", *data->p.gnlptr);
 	// DEBUG
-//	printf("map.h verif: %d\n", data->p.maph);
-//	printf("%s\n", line);
 	printf("mapw%d\n", data->p.mapw);
 	printf("maph%d\n", data->p.maph);
 	printf("mapx%d\n", data->mapx);
 	printf("mapy%d\n", data->mapy);
-//	printf("%p\n", list);
 //	ft_print_list(list);
-//	ft_parsing_error("OK", data, fd);
 	int z = 0;
-	printf("ligne 0?%s\n", *data->map);
-	printf("ligne 0?%s\n", data->map[0]);
-	printf("ligne 0?%d\n", data->map[0][0]);
 	while (data->map[z] && z < data->p.maph + 2)
 	{
 		printf("%s\n", data->map[z]);

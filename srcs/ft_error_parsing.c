@@ -48,23 +48,10 @@ void	ft_free_map(t_data *data)
 	i = 0;
 	while (data->map[i])
 	{
-//		printf("B%s\n", data->map[i]);
 		free(data->map[i]);
 		data->map[i] = NULL;
-//		printf("A%s\n", data->map[i]);
-//		if (data->map[i + 1] == 0)
-//		{
-//			printf("%d\n", i + 1);
-//			free(data->map[i + 1]);
-//			data->map[i + 1] = NULL;
-//		}
 		i++;
 	}
-//	printf("last%s\n", data->map[i]);
-//	printf("count%d\n", i);
-//	printf("L1%s\n", data->map[0]);
-//	free(data->map[0]);
-//	printf("L2%s\n", data->map[0]);
 	free(data->map);
 	data->map = NULL;
 }

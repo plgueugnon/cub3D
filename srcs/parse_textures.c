@@ -71,12 +71,21 @@ static void ft_test_path_validity(t_data *data, int flag, int fd)
 	if (flag == 's')
 		testfd = open(data->p.sp_tex_path, O_RDONLY);
 	if (testfd < 0)
-		ft_parsing_error("Error\nEither :\n\
-		1/ texture path is invalid\n\
-		2/ or there are characters left at the end of the path", data, fd);
+		ft_parsing_error("Error\nTexture path is invalid", data, fd);
 	else
 		close(testfd);
 	data->p.step++;
+}
+
+static void ft_check_if_xpm_file(t_data *data, char *line, int fd)
+{
+	int i;
+
+	i = ft_strlen(line);
+	if (line[i - 1] != 'm' && line[i - 2] != 'p' && line[i - 3] != 'x')
+		ft_parsing_error("Error\nEither :\n\
+		1/ texture file is not an xpm file\n\
+		2/ or there are characters left after path passed as input", data, fd);
 }
 
 void ft_parse_and_get_texpath(t_data *data, char *line, int fd, int flag)
@@ -101,5 +110,6 @@ void ft_parse_and_get_texpath(t_data *data, char *line, int fd, int flag)
 		ft_parsing_error("Error\nInvalid texture input, either :\n\
 			1/ there is no space between keycode input and path\n\
 			2/ or there are invalid char before path beginning", data, fd);
+	ft_check_if_xpm_file(data, line, fd);
 	ft_test_path_validity(data, flag, fd);
 }
