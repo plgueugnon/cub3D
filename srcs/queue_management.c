@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 15:06:36 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/25 23:19:04 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/01 13:09:48 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int		ft_queue_is_empty(t_queue *q)
 
 void	ft_add_to_queue(t_queue *q, int y, int x, t_data *data)
 {
-	t_node *tmp;
+	t_node	*tmp;
+
 	tmp = malloc(sizeof(t_node));
 	if (tmp == NULL)
 		ft_map_error("Error\nMalloc of node failed", data);
@@ -44,13 +45,18 @@ void	ft_add_to_queue(t_queue *q, int y, int x, t_data *data)
 		q->rear = tmp;
 	}
 	else
-		q->front = q->rear = tmp;
+	{
+		q->front = q->rear;
+		q->front = tmp;
+		q->rear = q->front;
+		q->rear = tmp;
+	}
 	q->count++;
 }
 
 void	ft_remove_from_queue(t_queue *q)
 {
-	t_node *tmp;
+	t_node	*tmp;
 
 	if (q->front == q->rear)
 	{

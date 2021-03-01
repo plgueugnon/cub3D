@@ -6,15 +6,15 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:48:44 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/25 22:27:02 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/01 12:40:28 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
 
-static void ft_basic_res_validity_check(char *line, t_data *data, int fd)
+static void	ft_basic_res_validity_check(char *line, t_data *data, int fd)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (line[j])
@@ -25,10 +25,10 @@ static void ft_basic_res_validity_check(char *line, t_data *data, int fd)
 	}
 }
 
-void ft_parse_res(t_data *data, char *line, int fd)
+void		ft_parse_res(t_data *data, char *line, int fd)
 {
-	int l;
-	int i;
+	int	l;
+	int	i;
 
 	l = 0;
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 12:04:48 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/23 20:00:42 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/01 12:32:52 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_check_spaces_between_values(t_data *data, char *line, int fd)
 {
-	int j;
+	int	j;
 
 	j = ft_capture_pos(data, line, fd);
 	while (line[j])
@@ -27,9 +27,9 @@ static void	ft_check_spaces_between_values(t_data *data, char *line, int fd)
 
 static void	ft_basic_color_validity_check(char *line, t_data *data, int fd)
 {
-	int j;
-	int n;
-	int r;
+	int	j;
+	int	n;
+	int	r;
 
 	j = ft_capture_pos(data, line, fd);
 	n = 0;
@@ -46,7 +46,6 @@ static void	ft_basic_color_validity_check(char *line, t_data *data, int fd)
 			if ((n == 0 && r == 2) || (n == 1 && r == 3))
 				ft_parsing_error("Error\nMisplaced or missing comma", data, fd);
 			j += ft_numlen(atoi(&line[j])) - 1;
-
 		}
 		j++;
 	}
@@ -71,11 +70,12 @@ static void	ft_create_color(t_data *data, int *tab, int flag, int fd)
 	data->p.step++;
 }
 
-void	ft_parse_floor_and_ceiling(t_data *data, char *line, int fd, int flag)
+void		ft_parse_floor_and_ceiling(t_data *data, char *line, int fd,
+			int flag)
 {
-	int tab[3];
-	int l;
-	int i;
+	int	tab[3];
+	int	l;
+	int	i;
 
 	l = 0;
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 19:00:16 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/25 22:54:25 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/01 12:31:07 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_tabstrcpy(t_data *data, int i, char *content)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (content[j])
@@ -27,8 +27,8 @@ static int	ft_tabstrcpy(t_data *data, int i, char *content)
 
 static void	ft_add_border_to_map(t_list *ptr, int i, t_data *data)
 {
-	int j;
-	int r;
+	int	j;
+	int	r;
 
 	j = 0;
 	while (j < data->p.mapw + 2)
@@ -54,17 +54,17 @@ static void	ft_malloc_rows(t_data *data)
 		ft_map_error("Error\nMalloc of **map failed", data);
 }
 
-static void ft_malloc_col(t_data *data, int i)
+static void	ft_malloc_col(t_data *data, int i)
 {
 	data->map[i] = malloc(sizeof(char) * (data->p.mapw + 3));
 	if (data->map[i] == NULL)
-			ft_map_error("Error\nMalloc of *map failed", data);
+		ft_map_error("Error\nMalloc of *map failed", data);
 }
 
-void	ft_transform_to_tab(t_list *list, t_data *data)
+void		ft_transform_to_tab(t_list *list, t_data *data)
 {
-	int i;
-	t_list *ptr;
+	int		i;
+	t_list	*ptr;
 
 	i = 0;
 	ptr = list;

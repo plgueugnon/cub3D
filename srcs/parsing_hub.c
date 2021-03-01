@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:34:53 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/26 15:47:24 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/01 12:54:17 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	ft_check_line_is_empty(t_data *data, char *line, int fd)
 {
-	if (*line != 0 && !ft_strstr(line, "NO ") && !ft_strstr(line, "SO ") &&
-		!ft_strstr(line, "WE ") && !ft_strstr(line, "EA ") &&
-		!ft_strstr(line, "R ") && !ft_strstr(line, "C ") &&
-		!ft_strstr(line, "F ") && !ft_strstr(line, "S "))
+	if (*line != 0 && !ft_strstr(line, "NO ") && !ft_strstr(line, "SO ")
+		&& !ft_strstr(line, "WE ") && !ft_strstr(line, "EA ")
+		&& !ft_strstr(line, "R ") && !ft_strstr(line, "C ")
+		&& !ft_strstr(line, "F ") && !ft_strstr(line, "S "))
 		ft_parsing_error("Error\nEither :\n\
 		1/ lines between inputs are not empty\n\
 		2/ or there is no space between a keycode input and its values\n\
@@ -26,7 +26,7 @@ static void	ft_check_line_is_empty(t_data *data, char *line, int fd)
 
 void	ft_parse_values_before_map(t_data *data, char *line, int fd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])
@@ -57,10 +57,11 @@ void	ft_check_empty_lines_before_map(t_data *data, char *line, int fd)
 {
 	if (*line == '\0')
 		return ;
-	else if (data->p.step == 8 && (ft_strstr(line, "NO") ||
-		ft_strstr(line, "SO") || ft_strstr(line, "WE") ||
-		ft_strstr(line, "EA") || ft_strstr(line, "R") || ft_strstr(line, "C")
-		|| ft_strstr(line, "F") || ft_strstr(line, "S")))
+	else if (data->p.step == 8 && (ft_strstr(line, "NO")
+			|| ft_strstr(line, "SO") || ft_strstr(line, "WE")
+			|| ft_strstr(line, "EA") || ft_strstr(line, "R")
+			|| ft_strstr(line, "C") || ft_strstr(line, "F")
+			|| ft_strstr(line, "S")))
 	{
 		data->p.step = 9;
 		return ;
@@ -70,8 +71,8 @@ void	ft_check_empty_lines_before_map(t_data *data, char *line, int fd)
 		data->p.step = 10;
 		return ;
 	}
-	else if ((data->p.step == 9 && !ft_strstr(line, "1")) ||
-		!ft_strstr(line, " "))
+	else if ((data->p.step == 9 && !ft_strstr(line, "1"))
+		|| !ft_strstr(line, " "))
 		ft_parsing_error("Error\nLines before map are not empty", data, fd);
 }
 /*
@@ -85,14 +86,14 @@ void	ft_print_list(t_list *list)
 	}
 }*/
 
-void	ft_end_file_r(t_data *data, int fd)
+void	ft_end_file_read(t_data *data, int fd)
 {
 	if (data->mapx == -1 || data->mapy == -1)
 		ft_parsing_error("Error\nPlayer position is missing", data, fd);
 	if (data->p.step == 10)
 	{
 		ft_free_line_before_next(data);
-		close (fd);
+		close(fd);
 	}
 	else
 		ft_parsing_error("Error\nHey the map is missing!", data, fd);
@@ -100,9 +101,9 @@ void	ft_end_file_r(t_data *data, int fd)
 
 void	ft_parse_cub_file(t_data *data, int fd)
 {
-	char *line;
-	t_list *list;
-	
+	char	*line;
+	t_list	*list;
+
 	list = NULL;
 	data->p.lstptr = &list;
 	while (ft_gnl(fd, &line, data) > 0)
@@ -121,7 +122,7 @@ void	ft_parse_cub_file(t_data *data, int fd)
 		}
 		ft_free_line_before_next(data);
 	}
-	ft_end_file_r(data, fd);
+	ft_end_file_read(data, fd);
 	ft_transform_to_tab(list, data);
 	ft_floodfill(data, 48, 55);
 

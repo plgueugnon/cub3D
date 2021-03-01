@@ -6,15 +6,15 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:56:09 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/25 12:28:26 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/01 12:46:20 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
 
-int ft_capture_pos(t_data *data, char *line, int fd)
+int			ft_capture_pos(t_data *data, char *line, int fd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])
@@ -29,8 +29,8 @@ int ft_capture_pos(t_data *data, char *line, int fd)
 			return (i + 2);
 		if (line[i] == 'S' && line[i + 1] == ' ')
 			return (i + 1);
-		if ((line[i] == 'F' && line[i + 1] == ' ') || (line[i] == 'C' && 
-			line[i + 1] == ' '))
+		if ((line[i] == 'F' && line[i + 1] == ' ') || (line[i] == 'C'
+					&& line[i + 1] == ' '))
 			return (i + 1);
 		if (line[i] == ' ')
 			i++;
@@ -41,7 +41,7 @@ int ft_capture_pos(t_data *data, char *line, int fd)
 	return (0);
 }
 
-static void ft_get_texpath(t_data *data, char *line, int i, int flag)
+static void	ft_get_texpath(t_data *data, char *line, int i, int flag)
 {
 	if (flag == 'N')
 		data->p.no_tex_path = ft_strdup(line + i + 1);
@@ -55,9 +55,9 @@ static void ft_get_texpath(t_data *data, char *line, int i, int flag)
 		data->p.sp_tex_path = ft_strdup(line + i + 1);
 }
 
-static void ft_test_path_validity(t_data *data, int flag, int fd)
+static void	ft_test_path_validity(t_data *data, int flag, int fd)
 {
-	int testfd;
+	int	testfd;
 
 	testfd = 0;
 	if (flag == 'N')
@@ -77,9 +77,9 @@ static void ft_test_path_validity(t_data *data, int flag, int fd)
 	data->p.step++;
 }
 
-static void ft_check_if_xpm_file(t_data *data, char *line, int fd)
+static void	ft_check_if_xpm_file(t_data *data, char *line, int fd)
 {
-	int i;
+	int	i;
 
 	i = ft_strlen(line);
 	if (line[i - 1] != 'm' && line[i - 2] != 'p' && line[i - 3] != 'x')
@@ -88,18 +88,18 @@ static void ft_check_if_xpm_file(t_data *data, char *line, int fd)
 		2/ or there are characters left after path passed as input", data, fd);
 }
 
-void ft_parse_and_get_texpath(t_data *data, char *line, int fd, int flag)
+void		ft_parse_and_get_texpath(t_data *data, char *line, int fd, int flag)
 {
-	int i;
-	int c;
+	int	i;
+	int	c;
 
 	c = 0;
 	i = ft_capture_pos(data, line, fd);
 	while (line[i] && line[i] == ' ')
 	{
-		if ((line[i] == ' ' && line[i + 1]  == '.' && line[i + 2] == '/') ||
-		(line[i] == ' ' && line[i + 1]  == '.' && line[i + 2] == '.' &&
-		line[i + 3] == '/'))
+		if ((line[i] == ' ' && line[i + 1] == '.' && line[i + 2] == '/')
+			|| (line[i] == ' ' && line[i + 1] == '.' && line[i + 2] == '.'
+					&& line[i + 3] == '/'))
 		{
 			ft_get_texpath(data, line, i, flag);
 			c = 1;

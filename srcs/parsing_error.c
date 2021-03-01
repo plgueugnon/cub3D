@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error_parsing.c                                 :+:      :+:    :+:   */
+/*   parsing_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 20:13:40 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/26 15:53:39 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/01 12:46:59 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_parsing_error(char *err, t_data *data, int fd)
 
 void	ft_free_map(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (data->map[i])

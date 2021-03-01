@@ -6,7 +6,7 @@
 #    By: pgueugno <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 14:58:12 by pgueugno          #+#    #+#              #
-#    Updated: 2021/02/26 15:58:10 by pgueugno         ###   ########.fr        #
+#    Updated: 2021/02/28 13:23:18 by pgueugno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,11 +42,11 @@ SRCS		=	$(notdir $(shell find $(SRCS_DIR) -type f -name *.c))
 ###############################################################################
 
 CC			=	@gcc
- CFLAGS		=	-Wall -Wextra -Werror -I$(HEADERS_DIR) -g3 
- #CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address -I$(HEADERS_DIR) 
- LDFLAGS		=	-L. $(LIB_LIBFT_DIR) 
- #LDFLAGS		=	-L. $(LIB_LIBFT_DIR) -Lmlx -lmlx -fsanitize=address 
- #FRAMEWORKS	=	-framework OpenGL -framework Appkit
+# CFLAGS		=	-Wall -Wextra -Werror -I$(HEADERS_DIR) -g3 
+CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address -I$(HEADERS_DIR) 
+ #LDFLAGS		=	-L. $(LIB_LIBFT_DIR) 
+LDFLAGS		=	-L. $(LIB_LIBFT_DIR) -Lmlx -lmlx -fsanitize=address 
+ FRAMEWORKS	=	-framework OpenGL -framework Appkit
 RM			=	@rm -f
 BUFSIZE		= -D BUFFER_SIZE=32
 
@@ -109,4 +109,6 @@ fclean: clean
 
 re:	fclean all
 
+.SILENT:
+		all
 .PHONY: all clean fclean re bonus

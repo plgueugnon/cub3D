@@ -6,15 +6,15 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 19:25:20 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/23 12:08:33 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/01 12:28:59 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
 
-void ft_start_parsing(t_data *data, char *mappath)
+void	ft_start_parsing(t_data *data, char *mappath)
 {
-	int fd;
+	int	fd;
 
 	fd = open(mappath, O_RDONLY);
 	if (fd < 0)
@@ -26,9 +26,9 @@ void ft_start_parsing(t_data *data, char *mappath)
 	ft_parse_cub_file(data, fd);
 }
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	t_data data;
+	t_data	data;
 
 	if (argc == 2 || argc == 3)
 	{

@@ -6,13 +6,13 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:44:27 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/24 20:54:23 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/01 12:27:50 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
 
-void ft_init_parsing_values(t_data *data)
+void	ft_init_parsing_values(t_data *data)
 {
 	data->p.res[0] = -1;
 	data->p.res[1] = -1;

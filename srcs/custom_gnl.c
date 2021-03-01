@@ -6,13 +6,13 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 15:39:08 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/26 15:42:41 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/01 12:17:43 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
 
-void	ft_clear_still_reachable(t_data *data)
+void			ft_clear_still_reachable(t_data *data)
 {
 	if (data->p.gnlptr)
 	{
@@ -20,6 +20,14 @@ void	ft_clear_still_reachable(t_data *data)
 		*data->p.gnlptr = NULL;
 		data->p.gnlptr = NULL;
 	}
+}
+
+static int		ft_malloc(char **line, int n)
+{
+	*line = malloc(sizeof(char) * (n + 1));
+	if (!(*line))
+		return (0);
+	return (1);
 }
 
 static int		ft_n_char_read(char **tmp, char **line, t_data *data)
@@ -39,7 +47,7 @@ static int		ft_n_char_read(char **tmp, char **line, t_data *data)
 	else if (ft_strchr(*tmp, '\n') != 0)
 	{
 		mem = ft_strchr(*tmp, '\n');
-		if (!(*line = malloc(sizeof(char) * (mem - *tmp + 1))))
+		if (!ft_malloc(&(*line), (mem - *tmp)))
 			return (-1);
 		*line = ft_strncpy(*line, *tmp, (mem - *tmp));
 		p = *tmp;
@@ -51,16 +59,16 @@ static int		ft_n_char_read(char **tmp, char **line, t_data *data)
 	return (0);
 }
 
-int		ft_gnl(int fd, char **line, t_data *data)
+int				ft_gnl(int fd, char **line, t_data *data)
 {
-	static char *tmp = NULL;
+	static char	*tmp = NULL;
 
-	if (line == NULL || fd < 0 || read(fd, tmp, 0) < 0 ||
-		BUFFER_SIZE < 0)
+	if (line == NULL || fd < 0 || read(fd, tmp, 0) < 0 || BUFFER_SIZE < 0)
 		return (-1);
 	if (!tmp)
-		if (!(tmp = ft_strdup("")))
-			return (-1);
+		tmp = ft_strdup("");
+	if (!tmp)
+		return (-1);
 	if (BUFFER_SIZE == 0)
 	{
 		*line = NULL;

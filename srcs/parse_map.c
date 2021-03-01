@@ -6,13 +6,13 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 13:02:55 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/25 13:07:57 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/01 12:39:03 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
 
-int ft_check_charset(char src, char *charset)
+int		ft_check_charset(char src, char *charset)
 {
 	while (*charset)
 	{
@@ -23,7 +23,7 @@ int ft_check_charset(char src, char *charset)
 	return (0);
 }
 
-int	ft_check_spaces_in_map(char *line)
+int		ft_check_spaces_in_map(char *line)
 {
 	if (*line == '\0')
 		return (0);
@@ -38,7 +38,7 @@ int	ft_check_spaces_in_map(char *line)
 
 void	ft_parse_map(t_data *data, char *line, int fd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	++(data->p.maph);
@@ -46,14 +46,14 @@ void	ft_parse_map(t_data *data, char *line, int fd)
 	{
 		if (!ft_check_charset(line[i], "012 NSWE"))
 			ft_parsing_error("Error\nWrong input in map lines", data, fd);
-		if ((line[i] == 'N' || line[i] == 'W' || line[i] == 'S' ||
-			line[i] == 'E') && (data->mapx == -1 && data->mapy == -1))
+		if ((line[i] == 'N' || line[i] == 'W' || line[i] == 'S'
+				|| line[i] == 'E') && (data->mapx == -1 && data->mapy == -1))
 		{
 			data->mapx = i;
 			data->mapy = data->p.maph;
 		}
-		else if ((line[i] == 'N' || line[i] == 'W' || line[i] == 'S' ||
-			line[i] == 'E') && (data->mapx != -1 && data->mapy != -1))
+		else if ((line[i] == 'N' || line[i] == 'W' || line[i] == 'S'
+				|| line[i] == 'E') && (data->mapx != -1 && data->mapy != -1))
 			ft_parsing_error("Error\nPlayer position already given", data, fd);
 		i++;
 	}
@@ -73,8 +73,8 @@ void	ft_free_line_before_next(t_data *data)
 
 void	ft_link_line(t_list **list, void *content, t_data *data, int fd)
 {
-	t_list *new;
-	t_list *end;
+	t_list	*new;
+	t_list	*end;
 
 	new = malloc(sizeof(t_list));
 	if (!new)
@@ -85,7 +85,6 @@ void	ft_link_line(t_list **list, void *content, t_data *data, int fd)
 		new->next = NULL;
 	}
 	end = *list;
-
 	if (!*list)
 	{
 		*list = new;

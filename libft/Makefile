@@ -6,7 +6,7 @@
 #    By: pgueugno <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/05 10:07:13 by pgueugno          #+#    #+#              #
-#    Updated: 2021/02/21 11:52:46 by pgueugno         ###   ########.fr        #
+#    Updated: 2021/03/01 11:20:43 by pgueugno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,18 @@ LIBS_DIR	=	../libs
 #							Sources filenames							      #
 ###############################################################################
 
-SRCS		=	$(notdir $(shell find $(SRCS_DIR) -type f -name *.c))
+SRCS		=	ft_atoi.c ft_lst_append.c ft_lstsize.c ft_putchar_fd.c\
+				ft_strjoin.c ft_strtrim.c ft_bzero.c ft_lstadd_back.c\
+				ft_memccpy.c ft_putendl_fd.c ft_strlcat.c ft_substr.c\
+				ft_calloc.c ft_lstadd_front.c ft_memchr.c ft_putnbr.c\
+				ft_strlcpy.c ft_tolower.c ft_isalnum.c ft_lstclear.c\
+				ft_memcmp.c ft_putnbr_fd.c ft_strlen.c ft_toupper.c\
+				ft_isalpha.c ft_lstdelone.c ft_memcpy.c ft_putstr.c\
+				ft_strmapi.c get_next_line.c ft_isascii.c ft_lstiter.c\
+				ft_memmove.c ft_putstr_fd.c ft_strncmp.c ft_isdigit.c\
+				ft_lstlast.c ft_memset.c ft_split.c ft_strnstr.c ft_isprint.c\
+				ft_lstmap.c ft_numlen.c ft_strchr.c ft_strrchr.c ft_itoa.c\
+				ft_lstnew.c ft_putchar.c ft_strdup.c ft_strstr.c
 
 ###############################################################################
 #							Commands and arguments						      #
