@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:34:53 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/01 12:54:17 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/02 09:05:38 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,18 +125,18 @@ void	ft_parse_cub_file(t_data *data, int fd)
 	ft_end_file_read(data, fd);
 	ft_transform_to_tab(list, data);
 	ft_floodfill(data, 48, 55);
-
+	ft_start_raycasting(data);
 	// DEBUG
-	printf("mapw%d\n", data->p.mapw);
-	printf("maph%d\n", data->p.maph);
-	printf("mapx%d\n", data->mapx);
-	printf("mapy%d\n", data->mapy);
+//	printf("mapw%d\n", data->p.mapw);
+//	printf("maph%d\n", data->p.maph);
+//	printf("mapx%d\n", data->mapx);
+//	printf("mapy%d\n", data->mapy);
 //	ft_print_list(list);
-	int z = 0;
-	while (data->map[z] && z < data->p.maph + 2)
-	{
-		printf("%s\n", data->map[z]);
-		z++;
-	}
-	ft_map_error("OK", data);
+//	int z = 0;
+//	while (data->map[z] && z < data->p.maph + 2)
+//	{
+//		printf("%s\n", data->map[z]);
+//		z++;
+//	}
+//	ft_map_error("OK", data);
 }

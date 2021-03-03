@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 13:02:55 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/01 12:39:03 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/02 09:51:09 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,14 @@ void	ft_parse_map(t_data *data, char *line, int fd)
 	{
 		if (!ft_check_charset(line[i], "012 NSWE"))
 			ft_parsing_error("Error\nWrong input in map lines", data, fd);
+		if (line[i] == '2')
+			data->s.nb++;
 		if ((line[i] == 'N' || line[i] == 'W' || line[i] == 'S'
 				|| line[i] == 'E') && (data->mapx == -1 && data->mapy == -1))
 		{
 			data->mapx = i;
 			data->mapy = data->p.maph;
+			ft_get_player_dir(line[i], data);
 		}
 		else if ((line[i] == 'N' || line[i] == 'W' || line[i] == 'S'
 				|| line[i] == 'E') && (data->mapx != -1 && data->mapy != -1))

@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 16:55:47 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/26 15:59:26 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/03 10:23:27 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,30 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
+
+# ifdef __APPLE__
+# define FORWARD 13
+# define BACKWARD 1
+# define RIGHT 2
+# define LEFT 0x0
+# define ROTATELEFT 123
+# define ROTATERIGHT 124
+# define ESC 53
+# define APPLE 1
+# define LINUX 0
+# endif
+
+# ifdef __linux__
+# define FORWARD 122
+# define BACKWARD 115
+# define RIGHT 100
+# define LEFT 113
+# define ROTATELEFT 65361
+# define ROTATERIGHT 65363
+# define ESC 65307
+# define APPLE 0
+# define LINUX 1
+# endif
 
 typedef struct s_node {
 	int x;
@@ -76,12 +100,12 @@ typedef struct s_spritedata {
 }				t_spritedata;
 
 typedef struct	s_move {
-	int		ta; // mouvement -> a renommer pour que + explicite
-	int		ts;
-	int		tw;
-	int		td;
-	int		rl;
-	int		rr;
+	int		forward; // mouvement -> a renommer pour que + explicite
+	int		backward;
+	int		strafeleft;
+	int		straferight;
+	int		rotateleft;
+	int		rotateright;
 }				t_move;
 
 typedef struct s_parse {
@@ -92,7 +116,7 @@ typedef struct s_parse {
 	char *ea_tex_path;
 	char *sp_tex_path;
 	unsigned int	floor;
-	unsigned int ceiling;
+	unsigned int	ceiling;
 	int step;
 	int mapw;
 	int maph;
@@ -108,7 +132,7 @@ typedef struct s_img {
 	char	*addr;
 	char	*addr_2;
 	int		bpp;
-	int		llength;
+	int		line_size;
 	int		endian;
 	void	*mlx;
 	void	*mlx_win;
@@ -162,6 +186,7 @@ void	ft_parsing_error(char *err, t_data *data, int fd);
 void	ft_map_error(char *err, t_data *data);
 void	ft_del(void *content);
 void	ft_free_map(t_data *data);
+void	ft_free_tex_path(t_data *data);
 
 //STILL REACHABLE DEL
 int		ft_gnl(int fd, char **line, t_data *data);
@@ -169,6 +194,9 @@ void	ft_clear_still_reachable(t_data *data);
 
 // INIT
 void	ft_init_parsing_values(t_data *data);
+void	ft_get_player_dir(char c, t_data *data);
+void	ft_init_raycast_values(t_data *data);
+void	ft_init_raycast_pointers(t_data *data);
 
 // MAIN
 int		main(int argc, char **argv);
@@ -210,28 +238,46 @@ void	ft_cleanup_queue(t_queue *q);
 // CREATE MAP
 void	ft_transform_to_tab(t_list *list, t_data *data);
 
-// A VOIR APRES PARSING
-int	ft_key_press(int key, t_data *data);
-int	ft_key_release(int key, t_data *data);
-int	ft_mouse_exit(t_data *data);
-int	ft_loop(t_data *data);
-void	ft_init_pos(t_data *data);
+//RAYCAST COMPUTE
+void	ft_init_ray_starting_point(t_data *data);
 void	ft_DDA_compute(t_data *data);
 void	ft_sidedist_compute(t_data *data);
+
+//RAYCASTING
 void	ft_draw_col(t_data *data);
 void	ft_draw_ceiling_and_floor(t_data *data);
 void	ft_custom_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	ft_fwd_or_bckwd(t_data *data);
+void	ft_init_texdir(t_data *data);
+void	ft_texel_compute(t_data *data);
+
+//LOOP
+void	ft_start_raycasting(t_data *data);
+int	ft_loop(t_data *data);
+void	ft_buffer_img(t_data *data);
+
+//TEXTURES
+void	ft_init_textures(t_data *data);
+
+//SPRITES
+void	ft_init_sprites(t_data *data);
+void	ft_sort_sprites(t_data *data);
+
+//EXIT PROG
+void	ft_exit(char *err, t_data *data);
+
+//KEYS
+int	ft_key_press(int key, t_data *data);
+int	ft_key_release(int key, t_data *data);
+int	ft_mouse_exit(t_data *data);
+
+//MOVE
+void	ft_forward_or_backward(t_data *data);
 void	ft_strafe_left_or_right(t_data *data);
 void	ft_rotate_right(t_data *data);
 void	ft_rotate_left(t_data *data);
-void	ft_buffer_img(t_data *data);
-int		ft_init_tex(t_data *data);
-void	ft_get_tex_adress(t_data *data);
-void	ft_init_texdir(t_data *data);
-void	ft_init_sprite(t_data *data);
+
+// A VOIR APRES PARSING
 void	ft_draw_sprite(t_data *data);
-void	ft_sort_sprites(t_data *data);
 void	ft_sprite_compute(t_data *data);
 
 #endif
