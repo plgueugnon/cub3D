@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:03:12 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/03 12:39:37 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/04 12:23:27 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	ft_buffer_img(t_data *data)
 	data->i.addr = ptr;
 }
 
-int	ft_loop(t_data *data)
+int		ft_loop(t_data *data)
 {
 	data->x = 0;
 	while (data->x < data->w)
 	{
 		ft_init_ray_starting_point(data);
 		ft_sidedist_compute(data);
-		ft_DDA_compute(data);
+		ft_dda_compute(data);
 		ft_draw_col(data);
 		data->s.zbuffer[data->x] = data->perpwalldist;
 		data->x++;
@@ -57,10 +57,10 @@ void	ft_start_raycasting(t_data *data)
 	ft_init_sprites(data);
 	data->i.img = mlx_new_image(data->i.mlx, data->w, data->h);
 	data->i.addr = mlx_get_data_addr(data->i.img, &data->i.bpp,
-		&data->i.line_size, &data->i.endian);
+			&data->i.line_size, &data->i.endian);
 	data->i.img_2 = mlx_new_image(data->i.mlx, data->w, data->h);
 	data->i.addr_2 = mlx_get_data_addr(data->i.img_2, &data->i.bpp,
-		&data->i.line_size, &data->i.endian);
+			&data->i.line_size, &data->i.endian);
 	mlx_hook(data->i.mlx_win, 2, 1L << 0, ft_key_press, data);
 	mlx_hook(data->i.mlx_win, 3, 1L << 1, ft_key_release, data);
 	mlx_hook(data->i.mlx_win, 17, 1L << 17, ft_mouse_exit, data);

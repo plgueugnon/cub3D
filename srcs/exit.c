@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 10:47:23 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/02 18:12:06 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/04 12:24:45 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	ft_free_sprites_values(t_data *data)
 		free(data->spos);
 }
 
-void	ft_exit(char *err, t_data *data)
+void		ft_exit(char *err, t_data *data)
 {
 	ft_free_tex_path(data);
 	ft_free_sprites_values(data);
@@ -42,6 +42,5 @@ void	ft_exit(char *err, t_data *data)
 		mlx_destroy_window(data->i.mlx, data->i.mlx_win);
 	ft_init_raycast_pointers(data);
 	printf("%s\n", err);
-	exit (0);
-	// Voir si necessaire de destroy display + de free(mlx)
+	exit(0);
 }

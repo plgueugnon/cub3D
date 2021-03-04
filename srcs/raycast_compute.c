@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 18:22:32 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/03 12:38:40 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/04 12:22:15 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_sidedist_compute(t_data *data)
 	}
 }
 
-void	ft_DDA_compute(t_data *data)
+void	ft_dda_compute(t_data *data)
 {
 	while (data->hit == 0)
 	{

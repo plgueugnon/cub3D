@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:34:53 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/02 09:05:38 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/04 12:26:15 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	ft_check_line_is_empty(t_data *data, char *line, int fd)
 		3/ or an input is missing", data, fd);
 }
 
-void	ft_parse_values_before_map(t_data *data, char *line, int fd)
+void		ft_parse_values_before_map(t_data *data, char *line, int fd)
 {
 	int	i;
 
@@ -53,7 +53,7 @@ void	ft_parse_values_before_map(t_data *data, char *line, int fd)
 	}
 }
 
-void	ft_check_empty_lines_before_map(t_data *data, char *line, int fd)
+void		ft_check_empty_lines_before_map(t_data *data, char *line, int fd)
 {
 	if (*line == '\0')
 		return ;
@@ -75,18 +75,8 @@ void	ft_check_empty_lines_before_map(t_data *data, char *line, int fd)
 		|| !ft_strstr(line, " "))
 		ft_parsing_error("Error\nLines before map are not empty", data, fd);
 }
-/*
-// A retirer
-void	ft_print_list(t_list *list)
-{
-	while (list)
-	{
-		printf("%s\n", list->content);
-		list = list->next;
-	}
-}*/
 
-void	ft_end_file_read(t_data *data, int fd)
+void		ft_end_file_read(t_data *data, int fd)
 {
 	if (data->mapx == -1 || data->mapy == -1)
 		ft_parsing_error("Error\nPlayer position is missing", data, fd);
@@ -99,7 +89,7 @@ void	ft_end_file_read(t_data *data, int fd)
 		ft_parsing_error("Error\nHey the map is missing!", data, fd);
 }
 
-void	ft_parse_cub_file(t_data *data, int fd)
+void		ft_parse_cub_file(t_data *data, int fd)
 {
 	char	*line;
 	t_list	*list;
@@ -126,17 +116,4 @@ void	ft_parse_cub_file(t_data *data, int fd)
 	ft_transform_to_tab(list, data);
 	ft_floodfill(data, 48, 55);
 	ft_start_raycasting(data);
-	// DEBUG
-//	printf("mapw%d\n", data->p.mapw);
-//	printf("maph%d\n", data->p.maph);
-//	printf("mapx%d\n", data->mapx);
-//	printf("mapy%d\n", data->mapy);
-//	ft_print_list(list);
-//	int z = 0;
-//	while (data->map[z] && z < data->p.maph + 2)
-//	{
-//		printf("%s\n", data->map[z]);
-//		z++;
-//	}
-//	ft_map_error("OK", data);
 }

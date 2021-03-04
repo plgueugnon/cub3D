@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 18:41:40 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/03 11:25:47 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/04 12:10:24 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_texel_compute(t_data *data)
 		data->t.wallx = data->posy + data->perpwalldist * data->raydiry;
 	data->t.wallx -= floor(data->t.wallx);
 	data->t.texx = (int)(data->t.wallx
-		* (double)data->texdata[data->t.texdir].width);
+			* (double)data->texdata[data->t.texdir].width);
 	if (data->side == 0 && data->raydirx > 0)
 		data->t.texx = data->texdata[data->t.texdir].width - data->t.texx - 1;
 	if (data->side == 1 && data->raydiry < 0)
@@ -41,9 +41,10 @@ void	ft_texel_compute(t_data *data)
 
 void	ft_custom_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	char *dst;
+	char	*dst;
+
 	dst = data->i.addr + (y * data->i.line_size + x * (data->i.bpp / 8));
-	*(unsigned int *)dst = color;
+	*(int *)dst = color;
 }
 
 void	ft_draw_ceiling_and_floor(t_data *data)
@@ -62,8 +63,8 @@ void	ft_draw_ceiling_and_floor(t_data *data)
 
 void	ft_draw_col(t_data *data)
 {
-	unsigned int color;
-	int *addr_int;
+	int	color;
+	int	*addr_int;
 
 	data->lineh = (int)(data->h / data->perpwalldist);
 	data->drawstart = -data->lineh / 2 + data->h / 2;

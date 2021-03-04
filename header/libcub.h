@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 16:55:47 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/03 10:23:27 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/04 12:23:07 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,7 +240,7 @@ void	ft_transform_to_tab(t_list *list, t_data *data);
 
 //RAYCAST COMPUTE
 void	ft_init_ray_starting_point(t_data *data);
-void	ft_DDA_compute(t_data *data);
+void	ft_dda_compute(t_data *data);
 void	ft_sidedist_compute(t_data *data);
 
 //RAYCASTING

@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 11:55:41 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/03 12:40:30 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/04 12:02:17 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	ft_get_sprites_pos(t_data *data)
 {
-	int i;
-	int j;
-	int r;
+	int	i;
+	int	j;
+	int	r;
 
 	i = 0;
 	r = 0;
@@ -38,7 +38,7 @@ static void	ft_get_sprites_pos(t_data *data)
 	}
 }
 
-void	ft_init_sprites(t_data *data)
+void		ft_init_sprites(t_data *data)
 {
 	data->s.zbuffer = malloc(sizeof(double) * data->w);
 	if (!data->s.zbuffer)
@@ -55,11 +55,11 @@ void	ft_init_sprites(t_data *data)
 	ft_get_sprites_pos(data);
 }
 
-void	ft_sort_sprites(t_data *data)
+void		ft_sort_sprites(t_data *data)
 {
-	int i;
-	int j;
-	double swap;
+	int			i;
+	int			j;
+	double		swap;
 
 	i = 0;
 	while (i < data->s.nb)

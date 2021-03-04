@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:48:44 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/01 12:40:28 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/03 19:40:11 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ void		ft_parse_res(t_data *data, char *line, int fd)
 	}
 	if (data->p.res[0] < 0 || data->p.res[1] < 0)
 		ft_parsing_error("Error\nMissing resolution value", data, fd);
+	if (data->p.res[0] == 0 || data->p.res[1] == 0)
+		ft_parsing_error("Error\nInvalid input: null resolution", data, fd);
 	data->p.step++;
 }

@@ -1,0 +1,22 @@
+R	1000	500
+SO ./textures/redbrick.xpm
+WE ./textures/wood.xpm
+EA ./textures/greystone.xpm
+NO ./textures/bluestone.xpm
+S ./textures/barrel.xpm
+F	220,100,0
+C	225,30,0
+
+
+11111111
+10000001
+10000001
+10000001
+100N0001
+10020001
+11111111
+
+11111111
+10000001
+10000001
+11111111
