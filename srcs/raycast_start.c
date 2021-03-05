@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:03:12 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/05 10:00:31 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/05 17:06:44 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	ft_start_raycasting(t_data *data)
 	mlx_hook(data->i.mlx_win, 2, 1L << 0, ft_key_press, data);
 	mlx_hook(data->i.mlx_win, 3, 1L << 1, ft_key_release, data);
 	mlx_hook(data->i.mlx_win, 17, 1L << 17, ft_mouse_exit, data);
+	if (data->save)
+		ft_loop(data);
 	mlx_loop_hook(data->i.mlx, ft_loop, data);
 	mlx_loop(data->i.mlx);
 }

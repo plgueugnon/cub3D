@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 10:02:02 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/05 12:55:17 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/05 17:07:04 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	ft_create_bmp_header(t_data *data, int fd)
 void	ft_save(t_data *data)
 {
 	int fd;
-	int x;
+//	int x;
 	int y;
 	int *addr_int;
 
@@ -52,15 +52,12 @@ void	ft_save(t_data *data)
 	if (fd < 0)
 		ft_exit("Error\nFailure to create a save file", data);
 	ft_create_bmp_header(data, fd);
-	y = data->h;
-	while (y > 0)
+	y = data->h - 1;
+	printf("%d\n %d\n %d\n %d\n", data->w, data->i.line_size, data->i.bpp, (data->i.line_size / (data->i.bpp / 8)));
+
+	while (y >= 0)
 	{
-		x = 0;
-		while (x < data->w)
-		{
-			write(fd, &addr_int[y * data->i.line_size / (data->i.bpp / 8) + x], 4);
-			x++;
-		}
+		write(fd, &(addr_int[y * data->i.line_size / (data->i.bpp / 8)]), data->w * 4);
 		y--;
 	}
 
