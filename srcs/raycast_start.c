@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:03:12 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/04 12:23:27 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/05 10:00:31 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int		ft_loop(t_data *data)
 		data->x++;
 	}
 	ft_draw_sprite(data);
+	if (data->save)
+		ft_save(data);
 	mlx_put_image_to_window(data->i.mlx, data->i.mlx_win, data->i.img, 0, 0);
 	ft_forward_or_backward(data);
 	ft_strafe_left_or_right(data);

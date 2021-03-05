@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 19:25:20 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/01 12:28:59 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/05 10:11:22 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		main(int argc, char **argv)
 {
 	t_data	data;
 
+	data.save = 0;
 	if (argc == 2 || argc == 3)
 	{
 		if (argc == 3)

@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 16:55:47 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/04 12:23:07 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/05 10:06:34 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct s_spritedata {
 }				t_spritedata;
 
 typedef struct	s_move {
-	int		forward; // mouvement -> a renommer pour que + explicite
+	int		forward;
 	int		backward;
 	int		strafeleft;
 	int		straferight;
@@ -261,6 +261,8 @@ void	ft_init_textures(t_data *data);
 //SPRITES
 void	ft_init_sprites(t_data *data);
 void	ft_sort_sprites(t_data *data);
+void	ft_draw_sprite(t_data *data);
+void	ft_sprite_compute(t_data *data);
 
 //EXIT PROG
 void	ft_exit(char *err, t_data *data);
@@ -276,8 +278,7 @@ void	ft_strafe_left_or_right(t_data *data);
 void	ft_rotate_right(t_data *data);
 void	ft_rotate_left(t_data *data);
 
-// A VOIR APRES PARSING
-void	ft_draw_sprite(t_data *data);
-void	ft_sprite_compute(t_data *data);
+//SAVE
+void	ft_save(t_data *data);
 
 #endif
