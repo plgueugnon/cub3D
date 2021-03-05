@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 19:25:20 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/05 10:11:22 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/05 13:31:13 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,14 @@
 void	ft_start_parsing(t_data *data, char *mappath)
 {
 	int	fd;
+	int i;
 
+	i = ft_strlen(mappath);
+	if (mappath[i - 1] != 'b' || mappath[i - 2] != 'u' || mappath[i - 3] != 'c')
+	{
+		printf("Error\nFirst argument is not a .cub file\n");
+		exit(0);
+	}
 	fd = open(mappath, O_RDONLY);
 	if (fd < 0)
 	{
