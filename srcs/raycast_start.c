@@ -6,13 +6,13 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 09:03:12 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/05 17:06:44 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/06 10:14:01 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libcub.h"
 
-void	ft_buffer_img(t_data *data)
+void		ft_buffer_img(t_data *data)
 {
 	void	*ptr;
 
@@ -25,7 +25,7 @@ void	ft_buffer_img(t_data *data)
 	data->i.addr = ptr;
 }
 
-int		ft_loop(t_data *data)
+int			ft_loop(t_data *data)
 {
 	data->x = 0;
 	while (data->x < data->w)
@@ -49,7 +49,19 @@ int		ft_loop(t_data *data)
 	return (1);
 }
 
-void	ft_start_raycasting(t_data *data)
+static void	ft_resize_window(t_data *data)
+{
+	int screenx;
+	int screeny;
+
+	mlx_get_screen_size(data->i.mlx, &screenx, &screeny);
+	if (data->w > screenx)
+		data->w = screenx;
+	if (data->h > screeny)
+		data->h = screeny;
+}
+
+void		ft_start_raycasting(t_data *data)
 {
 	ft_floodfill(data, 55, 48);
 	ft_init_raycast_values(data);
@@ -65,9 +77,10 @@ void	ft_start_raycasting(t_data *data)
 			&data->i.line_size, &data->i.endian);
 	mlx_hook(data->i.mlx_win, 2, 1L << 0, ft_key_press, data);
 	mlx_hook(data->i.mlx_win, 3, 1L << 1, ft_key_release, data);
-	mlx_hook(data->i.mlx_win, 17, 1L << 17, ft_mouse_exit, data);
+	mlx_hook(data->i.mlx_win, CROSSEXIT, 1L << 17, ft_mouse_exit, data);
 	if (data->save)
 		ft_loop(data);
+	ft_resize_window(data);
 	mlx_loop_hook(data->i.mlx, ft_loop, data);
 	mlx_loop(data->i.mlx);
 }

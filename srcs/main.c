@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 19:25:20 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/03/05 17:21:46 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/03/05 19:19:55 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_start_parsing(t_data *data, char *mappath)
 {
 	int	fd;
-	int i;
+	int	i;
 
 	i = ft_strlen(mappath);
 	if (mappath[i - 1] != 'b' || mappath[i - 2] != 'u' || mappath[i - 3] != 'c')
@@ -24,7 +24,7 @@ void	ft_start_parsing(t_data *data, char *mappath)
 		exit(0);
 	}
 	fd = open(mappath, O_DIRECTORY);
-	if (fd)
+	if (fd != -1)
 	{
 		printf("Error\nFirst argument is a directory\n");
 		close(fd);

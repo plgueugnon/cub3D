@@ -6,7 +6,7 @@
 #    By: pgueugno <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/21 14:58:12 by pgueugno          #+#    #+#              #
-#    Updated: 2021/03/04 15:17:20 by pgueugno         ###   ########.fr        #
+#    Updated: 2021/03/06 10:11:24 by pgueugno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,22 +32,26 @@ MLX_MAKE	=	Makefile
 MLX_LIB		=	libmlx.dylib
 OS			=	$(shell uname)
 
-
 ################################################################################
 #                               Sources filenames                              #
 ################################################################################
 
-SRCS		=	$(notdir $(shell find $(SRCS_DIR) -type f -name *.c))
+SRCS		=	custom_gnl.c parse_ceiling_and_floor.c raycast_draw.c\
+				exit.c parse_map.c raycast_start.c floodfill.c\
+				parse_resolution.c save.c init.c parse_textures.c\
+				sprite_draw.c keys.c parsing_error.c sprite_management.c\
+				main.c parsing_hub.c texture_init.c map_to_tab.c\
+				queue_management.c move.c raycast_compute.c
 
 ################################################################################
 #                              Commands and arguments                          #
 ################################################################################
 
 CC			=	@gcc
-# CFLAGS		=	-Wall -Wextra -Werror -I$(HEADERS_DIR) -g3 
-CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address -I$(HEADERS_DIR) 
- #LDFLAGS	=	-L . $(LIB_LIBFT_DIR) -L$(MLX_DIR) -l$(MLX_DIR)
- LDFLAGS = -L . $(LIB_LIBFT_DIR) -L$(MLX_DIR) -l$(MLX_DIR) -fsanitize=address 
+CFLAGS		=	-Wall -Wextra -Werror -I$(HEADERS_DIR) -g3 
+#CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address -I$(HEADERS_DIR) 
+#LDFLAGS = -L . $(LIB_LIBFT_DIR) -L$(MLX_DIR) -l$(MLX_DIR) -fsanitize=address 
+LDFLAGS = -L . $(LIB_LIBFT_DIR) -L$(MLX_DIR) -l$(MLX_DIR)
 FRAMEWORKS	=	-framework OpenGL -framework Appkit
 RM			=	@rm -f
 BUFSIZE		= -D BUFFER_SIZE=32
@@ -102,20 +106,20 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 
 $(NAME):	$(OBJS)
 			@ echo "\t$(_YELLOW)[Creating cub3D.out file]"
-	#		$(CC) $(OBJS) -o $@ $(LDFLAGS) $(FRAMEWORKS) 
-			$(CC) $(OBJS) -o $@ $(LDFLAGS) 
+			$(CC) $(OBJS) -o $@ $(LDFLAGS) $(FRAMEWORKS) 
 			@ echo "$(_GREEN)[Cub3D program created & ready to play]"
 
 clean:
-		@ echo "$(_RED)[cleaning cub3D objects files]"
+		@ echo "$(_RED)[cleaning up cub3D & mlx objects files]"
 		$(RM) $(OBJS)
+		@ echo "$(_RED)[deleting save file]"
+		$(RM) ./save.bmp
 		@ make -C $(LIBFT_DIR) -f $(LIBFT_MAKE) clean
 		@ make -C $(MLX_DIR) -f $(MLX_MAKE) clean
 
 fclean: clean
-		@ echo "$(_RED)[cleaning cub3D objects and library files]"
-#		$(RM) $(NAME) $(MLX_LIB) 
-		$(RM) $(NAME) 
+		@ echo "$(_RED)[cleaning up cub3D & mlx objects and library files]"
+		$(RM) $(NAME) $(MLX_LIB) 
 		@ make -C $(LIBFT_DIR) -f $(LIBFT_MAKE) fclean
 
 re:	fclean all
