@@ -27,10 +27,12 @@ LIBS_DIR	=	libs
 LIBFT_DIR	=	libft
 LIBFT_MAKE	=	Makefile
 LIB_LIBFT_DIR	= $(LIBS_DIR)/libft.a
-MLX_DIR		=	mlx
+ #MLX_DIR		=	mlx
+MLX_DIR		=	mlx_l
 MLX_MAKE	=	Makefile
-MLX_LIB		=	libmlx.dylib
-OS			=	$(shell uname)
+ #MLX_LIB		=	libmlx.dylib
+MLX_LIB		=	libmlx.a
+OS			=	$(shell uname -s)
 
 ################################################################################
 #                               Sources filenames                              #
@@ -51,8 +53,10 @@ CC			=	@gcc
 CFLAGS		=	-Wall -Wextra -Werror -I$(HEADERS_DIR) -g3 
 #CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address -I$(HEADERS_DIR) 
 #LDFLAGS = -L . $(LIB_LIBFT_DIR) -L$(MLX_DIR) -l$(MLX_DIR) -fsanitize=address 
-LDFLAGS = -L . $(LIB_LIBFT_DIR) -L$(MLX_DIR) -l$(MLX_DIR)
-FRAMEWORKS	=	-framework OpenGL -framework Appkit
+ #LDFLAGS = -L . $(LIB_LIBFT_DIR) -L$(MLX_DIR) -l$(MLX_DIR)
+ #FRAMEWORKS	=	-framework OpenGL -framework Appkit
+LDFLAGS = -L . $(LIB_LIBFT_DIR) -lmlx -lm -lbsd
+FRAMEWORKS = -lX11 -lXext
 RM			=	@rm -f
 BUFSIZE		= -D BUFFER_SIZE=32
 
@@ -60,10 +64,10 @@ BUFSIZE		= -D BUFFER_SIZE=32
 #                                 Defining colors                              #
 ################################################################################
 
-_RED		=	\x1b[31m
-_GREEN		=	\x1b[32m
-_YELLOW		=	\x1b[33m
-_CYAN		=	\x1b[96m
+_RED		=	\033[31m
+_GREEN		=	\033[32m
+_YELLOW		=	\033[33m
+_CYAN		=	\033[96m
 
 ################################################################################
 #                                  Compiling                                   #
@@ -71,15 +75,23 @@ _CYAN		=	\x1b[96m
 
 OBJS		=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
-all:	init_libft os_check init_mlx init $(NAME)
+all:	init_libft init_mlx init $(NAME)
 
+ #os_check 
 os_check:
-		if [ "$(OS)" = "Linux" ];\
-		then	$(MLX_DIR) = mlx_l\
-				$(MLX_LIB) = libmlx.a\
-				$(LDFLAGS) = -L $(MLX_DIR) -lmlx -lm -lbsd\
+		#	ifeq($(OS),Linux)
+		#		$(MLX_DIR) = mlx_l
+			#	$(MLX_LIB) = libmlx.a
+			#	$(LDFLAGS) = -L . $(MLX_DIR) -lmlx_l -lm -lbsd
+		#		$(FRAMEWORKS) = -lX11 -lXext
+		#	endif
+
+	#	if [ $(OS) = Linux ];\
+					 then	$(MLX_DIR) = mlx_l\
+$(MLX_LIB) = libmlx.a\
+$(LDFLAGS) = -L . $(MLX_DIR) -lmlx -lm -lbsd\
 				$(FRAMEWORKS) = -lX11 -lXest\
-			 echo "$(OS)";\
+			 echo $(OS);\
 		fi
 init:
 		@ if test -f $(NAME);\
