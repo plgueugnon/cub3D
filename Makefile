@@ -27,11 +27,11 @@ LIBS_DIR	=	libs
 LIBFT_DIR	=	libft
 LIBFT_MAKE	=	Makefile
 LIB_LIBFT_DIR	= $(LIBS_DIR)/libft.a
- #MLX_DIR		=	mlx
-MLX_DIR		=	mlx_l
+ MLX_DIR		=	mlx
+ #MLX_L_DIR		=	mlx_l
 MLX_MAKE	=	Makefile
- #MLX_LIB		=	libmlx.dylib
-MLX_LIB		=	libmlx.a
+ MLX_LIB		=	libmlx.dylib
+ #MLX_L_LIB		=	libmlx.a
 OS			=	$(shell uname -s)
 
 ################################################################################
@@ -53,10 +53,10 @@ CC			=	@gcc
 CFLAGS		=	-Wall -Wextra -Werror -I$(HEADERS_DIR) -g3 
 #CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address -I$(HEADERS_DIR) 
 #LDFLAGS = -L . $(LIB_LIBFT_DIR) -L$(MLX_DIR) -l$(MLX_DIR) -fsanitize=address 
- #LDFLAGS = -L . $(LIB_LIBFT_DIR) -L$(MLX_DIR) -l$(MLX_DIR)
- #FRAMEWORKS	=	-framework OpenGL -framework Appkit
-LDFLAGS = -L . $(LIB_LIBFT_DIR) -lmlx -lm -lbsd
-FRAMEWORKS = -lX11 -lXext
+ LDFLAGS = -L . $(LIB_LIBFT_DIR) -L$(MLX_DIR) -l$(MLX_DIR)
+ FRAMEWORKS	=	-framework OpenGL -framework Appkit
+ #LDFLAGS = -L . $(LIB_LIBFT_DIR) -lmlx -lm -lbsd
+ #FRAMEWORKS = -lX11 -lXext
 RM			=	@rm -f
 BUFSIZE		= -D BUFFER_SIZE=32
 
@@ -75,23 +75,24 @@ _CYAN		=	\033[96m
 
 OBJS		=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
-all:	init_libft init_mlx init $(NAME)
+all:	init_libft os_check init_mlx init $(NAME)
 
  #os_check 
 os_check:
-		#	ifeq($(OS),Linux)
-		#		$(MLX_DIR) = mlx_l
-			#	$(MLX_LIB) = libmlx.a
-			#	$(LDFLAGS) = -L . $(MLX_DIR) -lmlx_l -lm -lbsd
-		#		$(FRAMEWORKS) = -lX11 -lXext
-		#	endif
+ifeq ($(OS), Linux)
+MLX_DIR = mlx_l
+MLX_LIB = libmlx.a
+LDFLAGS = -L . $(LIB_LIBFT_DIR) -lmlx -lm -lbsd
+FRAMEWORKS = -lX11 -lXext
+endif
 
-	#	if [ $(OS) = Linux ];\
-					 then	$(MLX_DIR) = mlx_l\
-$(MLX_LIB) = libmlx.a\
-$(LDFLAGS) = -L . $(MLX_DIR) -lmlx -lm -lbsd\
-				$(FRAMEWORKS) = -lX11 -lXest\
-			 echo $(OS);\
+		#if [ $(OS) = Linux ];\
+		then	(MLX_DIR="mlx_l");\
+				echo $(MLX_DIR);\
+				MLX_LIB="libmlx.a";\
+				LDFLAGS="-L . ./mlx_l -lmlx -lm -lbsd";\
+				FRAMEWORKS="-lX11 -lXest";\
+				echo "OS is :$(OS)";\
 		fi
 init:
 		@ if test -f $(NAME);\

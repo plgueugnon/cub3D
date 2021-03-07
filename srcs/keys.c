@@ -14,7 +14,7 @@
 
 int	ft_mouse_exit(t_data *data)
 {
-	ft_exit("Game has ended properly", data);
+	ft_exit("Game has ended properly using window cross button", data);
 	return (0);
 }
 
@@ -33,7 +33,7 @@ int	ft_key_press(int key, t_data *data)
 	if (key == ROTATELEFT)
 		data->m.rotateleft = 1;
 	if (key == ESC)
-		ft_exit("Game has ended properly", data);
+		ft_exit("Game has ended properly using ESC keypad", data);
 	return (1);
 }
 
