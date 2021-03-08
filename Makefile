@@ -117,7 +117,7 @@ clean:
 
 fclean: clean
 		@ echo "$(_RED)[cleaning up cub3D & mlx objects and library files]"
-		$(RM) $(NAME) $(MLX_LIB) 
+		$(RM) $(NAME) $(MLX_LIB) $(HEADERS_DIR)/mlx.h 
 		@ make -C $(LIBFT_DIR) -f $(LIBFT_MAKE) fclean
 
 re:	fclean all

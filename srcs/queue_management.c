@@ -12,6 +12,15 @@
 
 #include "libcub.h"
 
+void	ft_cleanup_queue(t_queue *q)
+{
+	while (!ft_queue_is_empty(q))
+		ft_remove_from_queue(q);
+	if (q)
+		free(q);
+	q = NULL;
+}
+
 void	ft_initialise_queue(t_queue *q)
 {
 	q->count = 0;

@@ -73,6 +73,8 @@ void	ft_map_error(char *err, t_data *data)
 	ft_clear_still_reachable(data);
 	if (data->map)
 		ft_free_map(data);
+	if (data->spos)
+		ft_free_sprites_values(data);
 	printf("%s\n", err);
 	exit(0);
 }

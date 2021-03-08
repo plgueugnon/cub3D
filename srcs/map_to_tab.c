@@ -80,4 +80,5 @@ void		ft_transform_to_tab(t_list *list, t_data *data)
 	data->map[i] = 0;
 	ft_lstclear(data->p.lstptr, &ft_del);
 	data->p.lstptr = NULL;
+	ft_get_sprites_pos(data);
 }

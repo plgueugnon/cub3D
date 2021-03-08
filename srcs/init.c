@@ -30,6 +30,10 @@ void		ft_init_parsing_values(t_data *data)
 	data->mapx = -1;
 	data->mapy = -1;
 	data->s.nb = 0;
+	data->spos = NULL;
+	data->s.zbuffer = NULL;
+	data->s.order = NULL;
+	data->s.dist = NULL;
 }
 
 static void	ft_get_camera_plan(char c, t_data *data)
@@ -89,10 +93,6 @@ void		ft_init_raycast_pointers(t_data *data)
 	data->i.addr_2 = NULL;
 	data->i.mlx = NULL;
 	data->i.mlx_win = NULL;
-	data->spos = NULL;
-	data->s.zbuffer = NULL;
-	data->s.order = NULL;
-	data->s.dist = NULL;
 	data->texdata[0].img = NULL;
 	data->texdata[0].addr = NULL;
 	data->texdata[1].img = NULL;

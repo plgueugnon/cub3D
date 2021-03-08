@@ -12,7 +12,7 @@
 
 #include "libcub.h"
 
-static void	ft_free_sprites_values(t_data *data)
+void		ft_free_sprites_values(t_data *data)
 {
 	if (data->s.zbuffer)
 		free(data->s.zbuffer);

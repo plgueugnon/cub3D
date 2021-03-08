@@ -12,7 +12,7 @@
 
 #include "libcub.h"
 
-static void	ft_get_sprites_pos(t_data *data)
+void	ft_get_sprites_pos(t_data *data)
 {
 	int	i;
 	int	j;
@@ -20,6 +20,9 @@ static void	ft_get_sprites_pos(t_data *data)
 
 	i = 0;
 	r = 0;
+	data->spos = malloc(sizeof(t_sprite_pos) * data->s.nb);
+	if (!data->spos)
+		ft_exit("Error\nMalloc of sprite position tab failed", data);
 	while (data->map[i])
 	{
 		j = 0;
@@ -38,7 +41,7 @@ static void	ft_get_sprites_pos(t_data *data)
 	}
 }
 
-void		ft_init_sprites(t_data *data)
+void	ft_init_sprites(t_data *data)
 {
 	data->s.zbuffer = malloc(sizeof(double) * data->w);
 	if (!data->s.zbuffer)
@@ -49,13 +52,9 @@ void		ft_init_sprites(t_data *data)
 	data->s.dist = malloc(sizeof(double) * data->s.nb);
 	if (!data->s.dist)
 		ft_exit("Error\nMalloc of sprite dist tab failed", data);
-	data->spos = malloc(sizeof(t_sprite_pos) * data->s.nb);
-	if (!data->spos)
-		ft_exit("Error\nMalloc of sprite position tab failed", data);
-	ft_get_sprites_pos(data);
 }
 
-void		ft_sort_sprites(t_data *data)
+void	ft_sort_sprites(t_data *data)
 {
 	int			i;
 	int			j;
