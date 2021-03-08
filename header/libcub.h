@@ -29,8 +29,6 @@
 #  define ROTATERIGHT 124
 #  define ESC 53
 #  define CROSSEXIT 17
-#  define APPLE 1
-#  define LINUX 0
 # endif
 
 # ifdef __linux__
@@ -42,8 +40,6 @@
 #  define ROTATERIGHT 65363
 #  define ESC 65307
 #  define CROSSEXIT 33
-#  define APPLE 0
-#  define LINUX 1
 # endif
 
 typedef struct	s_node
@@ -245,6 +241,7 @@ void			ft_init_sprites(t_data *data);
 void			ft_sort_sprites(t_data *data);
 void			ft_draw_sprite(t_data *data);
 void			ft_sprite_compute(t_data *data);
+int				ft_abs(int n);
 void			ft_exit(char *err, t_data *data);
 int				ft_key_press(int key, t_data *data);
 int				ft_key_release(int key, t_data *data);

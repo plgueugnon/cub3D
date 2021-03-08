@@ -66,6 +66,8 @@ void		ft_start_raycasting(t_data *data)
 	ft_floodfill(data, 55, 48);
 	ft_init_raycast_values(data);
 	data->i.mlx = mlx_init();
+	if (!data->save)
+		ft_resize_window(data);
 	data->i.mlx_win = mlx_new_window(data->i.mlx, data->w, data->h, "cub3D");
 	ft_init_textures(data);
 	ft_init_sprites(data);
@@ -80,7 +82,6 @@ void		ft_start_raycasting(t_data *data)
 	mlx_hook(data->i.mlx_win, CROSSEXIT, 1L << 17, ft_mouse_exit, data);
 	if (data->save)
 		ft_loop(data);
-	ft_resize_window(data);
 	mlx_loop_hook(data->i.mlx, ft_loop, data);
 	mlx_loop(data->i.mlx);
 }

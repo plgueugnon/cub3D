@@ -12,26 +12,29 @@
 
 #include "libcub.h"
 
-static void	ft_compute_sprite_size_and_pos(t_data *data, int i)
+int			ft_abs(int n)
 {
-	data->s.spritex = data->spos[data->s.order[i]].x - data->posx;
-	data->s.spritey = data->spos[data->s.order[i]].y - data->posy;
-	data->s.invdet = 1.0 / (data->planx * data->diry - data->dirx
-			* data->plany);
+	if (n < 0)
+		n = -n;
+	return (n);
+}
+
+static void	ft_compute_sprite_size_and_pos(t_data *data)
+{
 	data->s.transformx = data->s.invdet * (data->diry * data->s.spritex
 			- data->dirx * data->s.spritey);
 	data->s.transformy = data->s.invdet * (data->planx * data->s.spritey
 			- data->plany * data->s.spritex);
 	data->s.screenx = (int)((data->w / 2) * (1 + data->s.transformx
 				/ data->s.transformy));
-	data->s.h = abs((int)(data->h / data->s.transformy));
+	data->s.h = ft_abs((int)(data->h / data->s.transformy));
 	data->s.drawstarty = data->h / 2 - data->s.h / 2;
 	if (data->s.drawstarty < 0)
 		data->s.drawstarty = 0;
 	data->s.drawendy = data->s.h / 2 + data->h / 2;
 	if (data->s.drawendy >= data->h)
 		data->s.drawendy = data->h - 1;
-	data->s.w = abs((int)(data->h / data->s.transformy));
+	data->s.w = ft_abs((int)(data->h / data->s.transformy));
 	data->s.drawstartx = data->s.screenx - data->s.w / 2;
 	if (data->s.drawstartx < 0)
 		data->s.drawstartx = 0;
@@ -53,7 +56,7 @@ static void	ft_print_pixels(t_data *data, int texx, int x)
 	while (y < data->s.drawendy)
 	{
 		d = (y) * 256 - data->h * 128 + data->s.h * 128;
-		texy = ((d * data->texdata[4].height) / data->s.h) / 256;
+		texy = ft_abs(((d * data->texdata[4].height) / data->s.h) / 256);
 		color = addr_int[texy * data->texdata[4].line_size
 			/ (data->texdata[4].bpp / 8) + texx];
 		if ((color & 0x00FFFFFF) != 0)
@@ -71,12 +74,16 @@ void		ft_sprite_compute(t_data *data)
 	i = 0;
 	while (i < data->s.nb)
 	{
-		ft_compute_sprite_size_and_pos(data, i);
+		data->s.spritex = data->spos[data->s.order[i]].x - data->posx;
+		data->s.spritey = data->spos[data->s.order[i]].y - data->posy;
+		data->s.invdet = 1.0 / (data->planx * data->diry - data->dirx
+			* data->plany);
+		ft_compute_sprite_size_and_pos(data);
 		x = data->s.drawstartx;
 		while (x < data->s.drawendx)
 		{
-			texx = (int)((256 * (x - (-data->s.w / 2 + data->s.screenx))
-						* data->texdata[4].width / data->s.w)) / 256;
+			texx = ft_abs((int)((256 * (x - (-data->s.w / 2 + data->s.screenx))
+						* data->texdata[4].width / data->s.w)) / 256);
 			if (data->s.transformy > 0 && x > 0 && x < data->w
 				&& data->s.transformy < data->s.zbuffer[x])
 				ft_print_pixels(data, texx, x);

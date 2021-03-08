@@ -24,10 +24,8 @@ static void	ft_free_sprites_values(t_data *data)
 		free(data->spos);
 }
 
-void		ft_exit(char *err, t_data *data)
+static void	ft_clear_img(t_data *data)
 {
-	ft_free_tex_path(data);
-	ft_free_sprites_values(data);
 	if (data->texdata[0].img)
 		mlx_destroy_image(data->i.mlx, data->texdata[0].img);
 	if (data->texdata[1].img)
@@ -38,8 +36,29 @@ void		ft_exit(char *err, t_data *data)
 		mlx_destroy_image(data->i.mlx, data->texdata[3].img);
 	if (data->texdata[4].img)
 		mlx_destroy_image(data->i.mlx, data->texdata[4].img);
-	if (data->i.mlx)
+	if (data->i.img)
+		mlx_destroy_image(data->i.mlx, data->i.img);
+	if (data->i.img_2)
+		mlx_destroy_image(data->i.mlx, data->i.img_2);
+}
+
+void		ft_exit(char *err, t_data *data)
+{
+	ft_free_tex_path(data);
+	ft_free_sprites_values(data);
+	ft_free_map(data);
+	ft_clear_still_reachable(data);
+	ft_clear_img(data);
+	if (data->i.mlx_win)
+	{
+		mlx_clear_window(data->i.mlx, data->i.mlx_win);
 		mlx_destroy_window(data->i.mlx, data->i.mlx_win);
+	}
+	if (data->i.mlx)
+	{
+		mlx_destroy_display(data->i.mlx);
+		free(data->i.mlx);
+	}
 	ft_init_raycast_pointers(data);
 	printf("%s\n", err);
 	exit(0);
