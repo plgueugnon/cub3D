@@ -32,10 +32,10 @@
 # endif
 
 # ifdef __linux__
-#  define FORWARD 122
+#  define FORWARD 119
 #  define BACKWARD 115
 #  define RIGHT 100
-#  define LEFT 113
+#  define LEFT 97
 #  define ROTATELEFT 65361
 #  define ROTATERIGHT 65363
 #  define ESC 65307
