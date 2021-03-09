@@ -48,11 +48,11 @@ SRCS		=	custom_gnl.c parse_ceiling_and_floor.c raycast_draw.c\
 ################################################################################
 
 CC			=	@gcc
-CFLAGS		=	-Wall -Wextra -Werror -g3 -I$(HEADERS_DIR) #-fsanitize=address
-LDFLAGS = -L . $(LIB_LIBFT_DIR) -L$(MLX_DIR) -l$(MLX_DIR) #-fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g3 -I$(HEADERS_DIR)
+LDFLAGS 	=	-L . $(LIB_LIBFT_DIR) -L$(MLX_DIR) -l$(MLX_DIR)
 FRAMEWORKS	=	-framework OpenGL -framework Appkit
 RM			=	@rm -f
-BUFSIZE		= -D BUFFER_SIZE=32
+BUFSIZE		=	-D BUFFER_SIZE=32
 
 ################################################################################
 #                                 Defining colors                              #
@@ -75,7 +75,7 @@ os_check:
 ifeq ($(OS), Linux)
 MLX_DIR = mlx_l
 MLX_LIB = libmlx.a
-LDFLAGS = -L . $(LIB_LIBFT_DIR) -lmlx -lm -lbsd #-fsanitize=address
+LDFLAGS = -L . $(LIB_LIBFT_DIR) -lmlx -lm -lbsd
 FRAMEWORKS = -lX11 -lXext
 endif
 
@@ -100,7 +100,6 @@ init_libft:
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 				@ echo "\t$(_YELLOW) compiling... $*.c"
 				$(CC) $(CFLAGS) $(BUFSIZE) -c $< -o $@
-	#			$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME):	$(OBJS)
 			@ echo "\t$(_YELLOW)[Creating cub3D.out file]"
