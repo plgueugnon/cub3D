@@ -40,12 +40,12 @@ static void	ft_get_camera_plan(char c, t_data *data)
 {
 	if (c == 'N')
 	{
-		data->planx = 0.66;
+		data->planx = -0.66;
 		data->plany = 0;
 	}
 	if (c == 'S')
 	{
-		data->planx = -0.66;
+		data->planx = 0.66;
 		data->plany = 0;
 	}
 	if (c == 'E')
@@ -65,12 +65,12 @@ void		ft_get_player_dir(char c, t_data *data)
 	if (c == 'N')
 	{
 		data->dirx = 0;
-		data->diry = 1;
+		data->diry = -1;
 	}
 	if (c == 'S')
 	{
 		data->dirx = 0;
-		data->diry = -1;
+		data->diry = 1;
 	}
 	if (c == 'E')
 	{
@@ -107,8 +107,8 @@ void		ft_init_raycast_pointers(t_data *data)
 
 void		ft_init_raycast_values(t_data *data)
 {
-	data->posx = data->mapx + 1;
-	data->posy = data->mapy;
+	data->posx = data->mapx + 1.5;
+	data->posy = data->mapy + 0.5;
 	data->movspeed = 0.1;
 	data->rotspeed = 0.1;
 	data->w = data->p.res[0];

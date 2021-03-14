@@ -67,8 +67,14 @@ void		ft_start_raycasting(t_data *data)
 	ft_init_raycast_values(data);
 	data->i.mlx = mlx_init();
 	if (!data->save)
+	{
 		ft_resize_window(data);
-	data->i.mlx_win = mlx_new_window(data->i.mlx, data->w, data->h, "cub3D");
+		data->i.mlx_win = mlx_new_window(data->i.mlx, data->w, data->h,
+		"cub3D");
+		mlx_hook(data->i.mlx_win, 2, 1L << 0, ft_key_press, data);
+		mlx_hook(data->i.mlx_win, 3, 1L << 1, ft_key_release, data);
+		mlx_hook(data->i.mlx_win, CROSSEXIT, 1L << 17, ft_mouse_exit, data);
+	}
 	ft_init_textures(data);
 	ft_init_sprites(data);
 	data->i.img = mlx_new_image(data->i.mlx, data->w, data->h);
@@ -77,9 +83,6 @@ void		ft_start_raycasting(t_data *data)
 	data->i.img_2 = mlx_new_image(data->i.mlx, data->w, data->h);
 	data->i.addr_2 = mlx_get_data_addr(data->i.img_2, &data->i.bpp,
 			&data->i.line_size, &data->i.endian);
-	mlx_hook(data->i.mlx_win, 2, 1L << 0, ft_key_press, data);
-	mlx_hook(data->i.mlx_win, 3, 1L << 1, ft_key_release, data);
-	mlx_hook(data->i.mlx_win, CROSSEXIT, 1L << 17, ft_mouse_exit, data);
 	if (data->save)
 		ft_loop(data);
 	mlx_loop_hook(data->i.mlx, ft_loop, data);

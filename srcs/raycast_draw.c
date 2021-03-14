@@ -19,9 +19,9 @@ void	ft_init_texdir(t_data *data)
 	if (data->side == 0 && data->raydirx >= 0)
 		data->t.texdir = 2;
 	if (data->side == 1 && data->raydiry < 0)
-		data->t.texdir = 1;
-	if (data->side == 1 && data->raydiry >= 0)
 		data->t.texdir = 0;
+	if (data->side == 1 && data->raydiry >= 0)
+		data->t.texdir = 1;
 }
 
 void	ft_texel_compute(t_data *data)

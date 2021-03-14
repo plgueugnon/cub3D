@@ -18,7 +18,8 @@ void	ft_start_parsing(t_data *data, char *mappath)
 	int	i;
 
 	i = ft_strlen(mappath);
-	if (mappath[i - 1] != 'b' || mappath[i - 2] != 'u' || mappath[i - 3] != 'c')
+	if (mappath[i - 1] != 'b' || mappath[i - 2] != 'u' || mappath[i - 3] != 'c'
+	|| mappath[i - 4] != '.')
 	{
 		printf("Error\nFirst argument is not a .cub file\n");
 		exit(0);

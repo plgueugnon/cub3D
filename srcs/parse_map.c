@@ -26,10 +26,10 @@ int		ft_check_charset(char src, char *charset)
 int		ft_check_spaces_in_map(char *line)
 {
 	if (*line == '\0')
-		return (0);
+		return (1);
 	while (*line)
 	{
-		if (ft_check_charset(*line, "012NSWE") == 1)
+		if (ft_check_charset(*line, "012NSWE ") == 1)
 			return (1);
 		line++;
 	}
