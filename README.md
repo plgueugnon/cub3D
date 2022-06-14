@@ -9,6 +9,7 @@
 - At any time, user should be able to exit either using 'exit' keypad or mouse 'x' window button
 - As usual per 42 standard : no memory leaks allowed (not even 'still reachable' type), and project is up to 42's coding norm
 - At launch, user can generate a print screen in bitmap format by adding --save after .map argument
+- Project is compatible with most linux & Mac OS recent distros
 
 ### Preview
 ![Cub3d_demo](https://user-images.githubusercontent.com/77667883/173692543-eb88307b-5e51-4719-8858-e1d3da4b7faf.gif)
